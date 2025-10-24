@@ -101,8 +101,7 @@ from retail_sales
 
 -- Solving questions
 -- Q.1 Write a SQL Query to retrieve all columns for sales made on '2022-11-05'
--- Q.2 Write a SQL Query to retrieve all transactions where the category is 'Clothing' 
---and the quantity sold is more than 10 in the month of Nov-22
+-- Q.2 Write a SQL Query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 10 in the month of Nov-22
 -- Q.3 Write a SQL Query to calculate the total sales (total_sale) for each category.
 -- Q.4 Write a SQL Query to find the average age of customers who purchased items from the 'Beauty' category.
 -- Q.5 Write a SQL Query to find all transactions where the total_sale is greater than 1000.
@@ -124,18 +123,6 @@ where
 	
 -- Q.2 Write a SQL Query to retrieve all transactions where the category is 'Clothing' 
 --and the quantity sold is more than 4 in the month of Nov-22
-select
-	category,
-	sum(quantity)
-from
-	retail_sales
-where
-	category like 'Clothing'
-	and
-	sale_date between '2022-11-01' and '2022-11-30'
-group by
-	category
-
 select
 	*
 from
@@ -198,6 +185,8 @@ from
 group by
 	gender,
 	category
+order by 
+	3 desc
 
 -- Resposta: Fem/Bea = 330; Fem/Clo = 347; Fem/Eletr = 340
 -- Male/Elet = 344; Male/Clo = 354; Male/Bea = 282
@@ -208,7 +197,7 @@ group by
 select 
 	"Year",
 	"Month",
-	avg_sale
+	round(cast(avg(avg_sale) as numeric), 2)
 from
 (
 select
@@ -226,6 +215,9 @@ order by
 
 where 
 	rank = 1
+group by
+	t1."Year",
+	t1."Month"
 
 -- Resposta: 2022-7 = avg sale 541,34 / 2023-2 = avg sale 535.53
 
